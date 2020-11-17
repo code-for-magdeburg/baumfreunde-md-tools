@@ -1,0 +1,34 @@
+{
+  "name": "baumfreunde-md-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-for-magdeburg/baumfreunde-md-tools.git"
+  },
+  "author": "Jens Winter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code-for-magdeburg/baumfreunde-md-tools/issues"
+  },
+  "homepage": "https://github.com/code-for-magdeburg/baumfreunde-md-tools#readme",
+  "dependencies": {
+    "cli-progress": "^3.8.2",
+    "csv": "^5.3.2",
+    "geojson": "^0.5.0",
+    "pdfjs-dist": "^2.5.207",
+    "pdfreader": "^1.2.7",
+    "yargs": "^16.1.1"
+  },
+  "devDependencies": {
+    "@types/cli-progress": "^3.8.0",
+    "@types/geojson": "^7946.0.7",
+    "@types/node": "^14.14.7",
+    "@types/yargs": "^15.0.9"
+  }
+}
