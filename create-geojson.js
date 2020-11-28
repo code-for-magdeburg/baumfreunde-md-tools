@@ -75,7 +75,7 @@ function createTreesFromCsvRow(row, treeRegistry) {
                 name: treeId + ' - ' + common,
                 lat: tree ? tree.Latitude : null,
                 lng: tree ? tree.Longitude : null,
-                reportedDate: row.reportedDate,
+                reportedDate: row.reported_date,
                 filename: row.filename,
                 filesize: row.filesize,
                 ref: treeId,
