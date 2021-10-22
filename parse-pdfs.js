@@ -3,6 +3,7 @@ const path = require('path');
 const csv = require('csv');
 const PdfReader = require('pdfreader').PdfReader;
 const progress = require('cli-progress');
+const { getPdfFilenames } = require('./utils');
 
 
 const pdfReader = new PdfReader();
@@ -38,16 +39,6 @@ function getTextFromPdf(filePath) {
         });
 
     });
-
-}
-
-
-function getPdfFilenames(pdfPath) {
-
-    return fs
-        .readdirSync(pdfPath, { withFileTypes: true })
-        .filter(dirent => dirent.isFile() && dirent.name.toLowerCase().endsWith('.pdf'))
-        .map(dirent => dirent.name);
 
 }
 
