@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/code-for-magdeburg/baumfreunde-md-tools#readme",
   "dependencies": {
+    "canvas": "^2.8.0",
     "cli-progress": "^3.9.1",
     "csv": "^5.5.3",
     "geojson": "^0.5.0",

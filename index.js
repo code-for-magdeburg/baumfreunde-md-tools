@@ -43,6 +43,11 @@ yargs(hideBin(process.argv))
         'pdf-path': {
             describe: 'Directory of pdf files to be analyzed',
             default: './'
+        },
+        'o': {
+            alias: 'output-path',
+            describe: 'Name of directory where extracted images will be stored',
+            default: './images'
         }
     }, extractImages)
 

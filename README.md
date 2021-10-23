@@ -23,3 +23,13 @@ node ./index.js create-geojson input-filepath [-o output-filepath]
 ```
 - `input-filepath` is a CSV file containing all available tree information (e.g. produced by the parse-pdfs command)
 - `output-filepath` is the name of the resulting GeoJSON file (default: ./trees.geojson)
+
+
+### Extract images
+
+Run using the following command
+```
+node ./index.js extract-images [pdf-path] [-o output-filepath]
+```
+- `pdf-path` points to the directory containing tree documentation PDF files (default: ./)
+- `output-path` is the name of the base directory where extracted images will be stored (default: ./images)
