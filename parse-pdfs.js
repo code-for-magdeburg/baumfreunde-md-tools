@@ -117,19 +117,41 @@ async function analyzePdfs(pdfPath, pdfFiles, fixedTrees) {
 }
 
 
-function saveToCsvFile(treeIds, outputFilePath) {
+function saveToFile(treeIds, outputFilepath) {
 
+    const ext = path.extname(outputFilepath).toLowerCase();
+    if (ext === '.json') {
+        saveToJsonFile(treeIds, outputFilepath);
+    } else {
+        saveToCsvFile(treeIds, outputFilepath);
+    }
+
+}
+
+
+function saveToJsonFile(treeIds, outputFilepath) {
+    fs.writeFileSync(outputFilepath, JSON.stringify(treeIds, null, 2));
+    console.log(`Results saved to ${outputFilepath}`);
+}
+
+
+function saveToCsvFile(treeIds, outputFilepath) {
     const entries = treeIds.map(entry => ({
         filename: entry.pdfFile,
-        tree_ids: entry.treeIds.join(';'),
+        tree_ids: entry.treeIds.join('|'),
         reported_date: entry.reportedDate,
         filesize: entry.filesize
     }));
     csv.stringify(entries, { header: true }, (err, output) => {
-        fs.writeFileSync(outputFilePath, output);
-        console.log(`Results saved to ${outputFilePath}`);
+        fs.writeFileSync(outputFilepath, output);
+        console.log(`Results saved to ${outputFilepath}`);
     });
+}
 
+
+function outputFiletypeIsSupported(outputFilepath) {
+    const ext = path.extname(outputFilepath).toLowerCase();
+    return ext === '.json' || ext === '.csv';
 }
 
 
@@ -137,10 +159,15 @@ async function parsePdfFiles(args) {
 
     const { pdfPath, fixedTreesFilepath, outputFilepath } = args;
 
+    if (!outputFiletypeIsSupported(outputFilepath)) {
+        console.log('Output file type is not supported.');
+        return;
+    }
+
     const pdfFiles = getPdfFilenames(pdfPath);
     const fixedTrees = fixedTreesFilepath ? await getFixedTrees(fixedTreesFilepath) : [];
     const trees = await analyzePdfs(pdfPath, pdfFiles, fixedTrees);
-    saveToCsvFile(trees, outputFilepath);
+    saveToFile(trees, outputFilepath);
 
 }
 

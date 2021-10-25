@@ -60,7 +60,7 @@ async function loadTrees(inputFilepath, treeRegistry) {
 
 function createTreesFromCsvRow(row, treeRegistry) {
 
-    const treeIds = row.tree_ids.split(';');
+    const treeIds = row.tree_ids.split('|');
     return treeIds
         .map(treeId => {
 

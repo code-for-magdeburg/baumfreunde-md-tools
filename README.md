@@ -5,7 +5,7 @@
 - Scans PDF text content for tree ids
 - Gets the size of PDF files
 - Gets the reported date from filename 
-- Stores results in CSV file
+- Stores results in CSV of JSON file
 
 Run using the following command
 ```
@@ -13,7 +13,7 @@ node ./index.js parse-pdfs [pdf-path] [-f fixed-trees-filepath] [-o output-filep
 ```
 - `pdf-path` points to the directory containing tree documentation PDF files (default: ./)
 - `fixed-trees-filepath` is a CSV file that contains a list of trees with predefined tree ids
-- `output-filepath` is the name of the resulting CSV file (default: ./parsed_trees.csv)
+- `output-filepath` is the name of the resulting file (default: ./parsed_trees.csv)
 
 ### Create GeoJSON file
 
