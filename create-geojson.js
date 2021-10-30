@@ -32,7 +32,6 @@ async function loadTrees(inputFilepath, treeRegistry) {
         fs
             .createReadStream(inputFilepath)
             .pipe(csv.parse({ cast: true, columns: true }))
-            //.on('data', row => trees.push(...createTreesFromCsvRow(row, treeRegistry)))
             .on('data', row => rows.push(row))
             .on('end', () => {
 
@@ -73,8 +72,8 @@ function createTreesFromCsvRow(row, treeRegistry) {
             const common = tree.Gattung.indexOf(',') > -1 ? tree.Gattung.split(',')[1].trim() : '';
             return {
                 name: treeId + ' - ' + common,
-                lat: tree ? tree.Latitude : null,
-                lng: tree ? tree.Longitude : null,
+                lat: tree ? tree.latitude : null,
+                lng: tree ? tree.longitude : null,
                 reportedDate: row.reported_date,
                 filename: row.filename,
                 filesize: row.filesize,
@@ -82,8 +81,8 @@ function createTreesFromCsvRow(row, treeRegistry) {
                 genus,
                 common,
                 height: tree.Baumhoehe,
-                crown: tree.Kronendurchmesser,
-                dbh: tree.Stammumfang,
+                crown: tree.Kronendurc,
+                dbh: tree.Stammumfan,
                 address: tree.Gebiet
             };
 
@@ -103,7 +102,7 @@ async function createGeoJson(args) {
 
     const { inputFilepath, outputFilepath } = args;
 
-    const treeRegistry = await loadTreeRegistry('./data/Baumkataster 2019.csv');
+    const treeRegistry = await loadTreeRegistry('./data/Baumkataster-Magdeburg-2021.csv');
     const trees = await loadTrees(inputFilepath, treeRegistry);
     saveAsGeoJson(trees, outputFilepath);
     console.log(`Results saved to ${outputFilepath}`);
