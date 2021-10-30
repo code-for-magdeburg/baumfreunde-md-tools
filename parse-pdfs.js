@@ -133,7 +133,8 @@ function saveToFile(treeIds, outputFilepath) {
 
 
 function saveToJsonFile(treeIds, outputFilepath) {
-    fs.writeFileSync(outputFilepath, JSON.stringify(treeIds, null, 2));
+    const flatTreeIds = flattenTreeIds(treeIds);
+    fs.writeFileSync(outputFilepath, JSON.stringify(flatTreeIds, null, 2));
     console.log(`Results saved to ${outputFilepath}`);
 }
 
@@ -149,6 +150,21 @@ function saveToCsvFile(treeIds, outputFilepath) {
         fs.writeFileSync(outputFilepath, output);
         console.log(`Results saved to ${outputFilepath}`);
     });
+}
+
+
+function flattenTreeIds(treeIds) {
+
+    return treeIds.reduce(
+        (p, c) => p.concat(c.treeIds.map(treeId => ({
+            treeId,
+            reportedDate: c.reportedDate,
+            pdfFile: c.pdfFile,
+            filesize: c.filesize
+        }))),
+        []
+    );
+
 }
 
 
