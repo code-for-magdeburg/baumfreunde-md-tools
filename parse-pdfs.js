@@ -12,7 +12,10 @@ const pdfReader = new PdfReader();
 function findTreeIdsInString(s) {
     const regExp = /\W+|_/;
     const words = s.split(regExp);
-    return words.filter(word => word.match('^[GSLKFAs][0-9]+$'));
+    const neighbors = words
+        .slice(1)
+        .map((word, index) => words[index] + word);
+    return [...neighbors, ...words].filter(word => word.match('^[GSLKFAs][0-9]+$') && word.length > 2);
 }
 
 
